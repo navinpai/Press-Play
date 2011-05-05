@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @playlist.name %>
+<br/>
+<% if @playlist.user_id == current_user.id %>
+<%= link_to 'Edit Playlist Details', edit_playlist_path(@playlist) %>|
+<%= link_to 'Delete Playlist', @playlist, :confirm => 'Are you sure?', :method => :delete %>
+<br/>
+<% end %>
+
+<% if @connections.count == 0 %>
+NO SONGS IN PLAYLIST
+<% else %>
+<embed src="http://localhost:3000/playlist.swf" menu="false" quality="high" width="300" height="320" name="index" allowScriptAccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="playList=http://localhost:3000/playlists/<%= @playlist.id.to_s %>.xml&ShowPlaylist=1&ShowEQ=1&firstTrack=1&initVol=50" wmode="transparent" border="0" / >
+<% end %>
+</p>
+<div class="playdet"> 
+</div>
+<br/>
+<br/>

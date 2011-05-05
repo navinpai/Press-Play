@@ -1,0 +1,36 @@
+<div class="content">
+<h1>Uploaded By: <%= Profile.find(current_user.id).name %></h1>
+	
+<table>
+<br/><br/><% @songs.each do |song| %>
+<% @artist=Artist.find(song.artist_id) %>
+  <tr>
+    <td><h2><%= song.title %><h3><%= @artist.name %></h3></td>
+    <td>&nbsp;&nbsp;<%= link_to 'Play', song %>&nbsp;&nbsp;</td>
+
+</tr>
+<% end %>
+</table>
+<div class="stuffalso" align="left">
+<%= will_paginate @songs %>
+</div>
+
+<br />
+<% if user_signed_in? %>
+<%= link_to 'New Song', new_song_path %>
+<% end %>
+<div class="prof" align="center">
+<% if user_signed_in? %>
+<br/>
+Hey, <%= Profile.find(current_user.id).name %><br /><br />
+<% @profile=Profile.find(current_user.id) %>
+ <div id="userBadge" class="clearit user vcard" id="hcard">
+                <div class="badgeAvatar">
+                                            <span class="userImage">
+  <%= image_tag @profile.image_url.to_s %><div class="userBadge	"> <a href="/profiles/<%= current_user.id %>/edit" >Edit Profile</a></div></span> </div>
+
+  </div>
+
+<% end %>
+</div>
+</div>

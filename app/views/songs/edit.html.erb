@@ -1,0 +1,11 @@
+<% if @song.user_id == current_user.id %>
+<h1>Editing song</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @song %> |
+<% else %>
+CANNOT PERFORM THIS ACTION<br/>
+<% end %>
+<%= link_to 'Back', songs_path %>
+

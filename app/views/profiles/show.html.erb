@@ -1,0 +1,63 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+
+
+   <div id="userBadge" class="clearit user vcard" id="hcard">
+                <div class="badgeAvatar">
+                                            <span class="userImage">
+  <%= image_tag @profile.image_url.to_s %></span> </div>
+  
+   <div class="badgeHead">
+   <b>Name: </b><%= @profile.name %>
+   <br/>
+   <b>Member since:</b> <%= @user.created_at.strftime("%d/%m/%y") %>
+   
+<% if @profile.id ==current_user.id %>
+<br/><%= link_to 'Edit Profile', edit_profile_path(@profile) %>
+<% end %>
+
+</div></div>
+</p>
+<div class="profdet">
+<h4><%= @profile.name %>'s Playlists </h4>
+<% if @playlists.count == 0 %>
+<br/>
+No Playlists
+<br/>
+<br/>
+
+<% else %>
+<table>
+<br/><% @playlists.each do |playlist| %>
+  <tr>
+    <td><h2><%= playlist.name %>&nbsp;&nbsp;&nbsp;<br/></h2></td>
+    <td><%= link_to 'Show', playlist %></td>
+  </tr>
+<% end %>
+</table>
+<div class="stuffalso" align="left">
+<%= will_paginate @playlists %>
+</div>
+<% end %><h4><%= @profile.name %>'s Songs </h4>
+<% if @songs.count == 0 %>
+<br/>
+No Playlists
+<br/>
+<br/>
+
+<% else %>
+
+<table>
+<br/><% @songs.each do |song| %>
+  <tr>
+    <td><h2><%= song.title %>&nbsp;&nbsp;&nbsp;<br/></h2></td>
+    <td><%= link_to 'Show', song %></td>
+  </tr>
+<% end %>
+</table>
+<div class="stuffalso" align="right">
+<%= will_paginate @playlists %>
+</div>
+<% end %>
+</div>

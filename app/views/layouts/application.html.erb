@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Press Play - Let The Music Play! </title>
+<link rel="shortcut icon" href="images/favicon.ico" />
+  <%= stylesheet_link_tag :all %>
+  <%= javascript_include_tag :defaults %>
+  <%= csrf_meta_tag %>
+  </head>
+<body>
+<% if user_signed_in? %>
+  <li>
+    <%= link_to('Home', root_path)  %> | <%= link_to('Logout', destroy_user_session_path) %>  |  <a href="/songs/mysongs" >My Songs</a>  |  <a href="/playlists/myplaylists" >My Playlists</a> | <a href="/profiles/<%= current_user.id %>" >Profile</a> 
+	</li>
+<% else %>
+  <li>
+  <%= link_to('Home', root_path)  %> | <%= link_to('Login', new_user_session_path)  %>  or <%= link_to('Register', new_user_registration_path)  %>
+  </li>
+<% end %>
+<div class="searchbox">
+<form action="/songs/search" enctype="multipart/form-data" method="POST"> 
+<%= text_field_tag :search, params[:search], :value => "Enter Song Or Artist" %>
+<input src='/images/search.png' value="Search" type="image">
+</form>
+</div>
+<div align="center">
+<a href="/"><img align="center	" src="../../images/header.png" border=0 /></a>
+<div class="stuff" />
+<br/>	
+ <p class="notice"><%= notice %></p>
+ <p class="alert"><%= alert %></p>
+ 
+<%= yield %>
+</div>
+</div>
+</div>
+<div class="twt-share"> A NDPdotMP3 Production </div>
+</div></body>
+</html>

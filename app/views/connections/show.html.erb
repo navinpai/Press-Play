@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Song:</b>
+  <%= @connection.song_id %>
+</p>
+
+<p>
+  <b>Playlist:</b>
+  <%= @connection.playlist_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_connection_path(@connection) %> |
+<%= link_to 'Back', connections_path %>

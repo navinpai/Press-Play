@@ -1,0 +1,9 @@
+<% if @profile.id == current_user.id %>
+<h1>Editing profile</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @profile %>
+<% else %>
+CANNOT PERFORM THIS ACTION
+<% end %>

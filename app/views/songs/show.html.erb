@@ -1,0 +1,45 @@
+<div class="player">
+<p>
+  <b>Title:</b>
+  <%= @song.title %>
+ <p />
+   <b>Artist:</b>
+  <%= @artist.name %>
+  <p />
+     <b>Uploaded By:</b>
+  <a href="/profiles/<%= @creator.id %>" > <%= @creator.name %> </a>
+  <p />
+
+<% if user_signed_in? %>
+<% @playlist = Playlist.where(:user_id => current_user.id) %>
+	
+<% if @creator.id == current_user.id %> 
+<%= link_to 'Edit Song Details', edit_song_path(@song) %> |<%= link_to 'Delete Song', @song, :confirm => 'Are you sure?', :method => :delete %>|
+<% end %>
+<% end %>
+<%= link_to 'Back', songs_path %>
+<p />
+  <embed src="http://localhost:3000/playlist.swf" menu="false" quality="high" width="300" height="320" name="index" allowScriptAccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="playList=http://localhost:3000/songs/<%= @song.id.to_s %>.xml&ShowPlaylist=0&ShowEQ=1&firstTrack=1&initVol=50" wmode="transparent" border="0" / >
+</div>
+</p>
+
+<% if user_signed_in? %>
+<div class="playlist" align= "right">
+<%= form_for(@connection) do |f| %>
+  <div class="field">
+	<%= f.hidden_field :song_id, :value =>@song.id %>
+  </div>
+  <div class="field">
+<br />
+ <%= f.collection_select :playlist_id, @playlist, :id, :name, :prompt => "Select a Playlist" %>
+  <br />Can't find a playlist? <br /><a href='/playlists/new'>Why not create a new one? </a><br /><br />
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+</div>
+  </div>
+<% end %>
+<% end %>
+
+
+

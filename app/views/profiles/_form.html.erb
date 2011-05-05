@@ -1,0 +1,29 @@
+<%= form_for(@profile, :html=>{:multipart => true}) do |f| %>
+  <% if @profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+      <ul>
+      <% @profile.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %></div>
+	
+	   <div id="userBadge" class="clearit user vcard" id="hcard">
+                <div class="badgeAvatar">
+                                            <span class="userImage">
+  <%= image_tag @profile.image_url.to_s %></span> </div><div class="field">Current Avatar</div>
+    <div class="field">
+	<%= f.label :Choose_New_Avatar %><br />
+	<%= f.file_field :image %></div>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

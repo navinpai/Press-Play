@@ -1,0 +1,26 @@
+<%= form_for(@song, :html=>{:multipart => true}) do |f| %>
+  <% if @song.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@song.errors.count, "error") %> prohibited this song from being saved:</h2>
+
+      <ul>
+      <% @song.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+  <br />
+    <%= f.label :title %>: <%= f.text_field :title %><br /><br />
+   <label for="song_country_id">Artist:</label>
+  <%= f.collection_select :artist_id, @artist, :id, :name, :prompt => "Select a Artist" %>
+ <br/> Can't find the artist? <a href='/artists/new'>Why not add one? </a><br /><br />
+
+	<%= f.label :song_file %>: <%= f.file_field :songfile %><br />
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
